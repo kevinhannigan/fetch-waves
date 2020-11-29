@@ -7,7 +7,8 @@ const WaveSummary = ({ waves }) => {
     return (
         <div className="py-3">
             <Link to={`/waveforecast/${waves.endPoint}`} className="home">
-                <Button as="h4" className="py-2" variant="homepage">{waves.city}</Button>
+                <Button as="h4" className="py-2" variant="homepage">{waves.city}{' '} </Button><br></br>
+                View Details <i class="fas fa-chart-line"></i> 
             </Link>
             <div className="pt-2">
                 <Row index={0} classname="py-2">

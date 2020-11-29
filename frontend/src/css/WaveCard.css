@@ -1,0 +1,12 @@
+.card-style {
+    display: inline-block;
+    min-width: 175px;
+    text-align:center;
+    padding: 5px;
+}
+
+.report-card {
+    border:none;
+}
+
+

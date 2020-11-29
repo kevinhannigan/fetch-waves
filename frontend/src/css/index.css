@@ -1,0 +1,101 @@
+main {
+  min-height: 80vh;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+}
+a:hover {
+   color: blue;
+}
+
+a.home {
+  color: black;
+  font-weight: bold;
+}
+
+td, th  {
+  width: auto;
+}
+
+td.min, th.min {
+  white-space: nowrap;
+  padding: 8px;
+  text-align: center;
+}
+
+td.ice {
+  color: #65499c;
+  background: #c7a4ff
+}
+
+td.cold {
+  color: #49599a;
+  background: #aab6fe;
+}
+
+td.neutral {
+  color: #2286c3;
+  background: #9be7ff;
+}
+
+td.neutral2 {
+  color: #00867d;
+  background: #82e9de;
+}
+
+td.warm {
+  color: #519657;
+  background: #b2fab4;
+}
+
+td.gcell {
+  color: #519657;
+  background: #b2fab4;
+  font-weight: bold;
+  white-space: nowrap;
+  padding: 8px;
+  text-align: center;
+}
+
+td.bcell {
+  color: #ba6b6c;
+  background: #ffcccb;
+  font-weight: bold;
+  white-space: nowrap;
+  padding: 8px;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  text-align: center;
+}
+
+.btn-homepage {
+  color: #fff;
+  background-color: #2780e3;
+  border-color: #2780e3;
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 10px;
+}
+
+.card-style {
+  display: inline-block;
+  min-width: 175px;
+  text-align: center;
+  padding: 5px;
+  border-block: 10px;
+  border-color: white;
+  border-radius: 10px;
+}
+
+
+

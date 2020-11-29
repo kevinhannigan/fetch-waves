@@ -13,8 +13,8 @@ const WaveSummary = ({ waves }) => {
             <div className="pt-2">
                 <Row index={0} classname="py-2">
                     <Col><i className="fas fa-water"></i></Col>
-                    <Col><i className="fas fa-wind"></i></Col>
                     <Col><i className="fas fa-location-arrow"></i></Col>
+                    <Col><i className="fas fa-wind"></i></Col>
                     <Col><i className="fas fa-location-arrow"></i></Col>
                 </Row>
                 <Row index={1}>

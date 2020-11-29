@@ -64,7 +64,7 @@ const DetailsTable = ({ wave }) => {
                             <td className="min" key={index}>{w.Temperature}</td>)}
                     </tr>
                     <tr>
-                        <th>Percipitation %</th>
+                        <th>Precipitation %</th>
                         {wave?.properties?.map((w, index) =>
                             <td className="min" key={index}>{w.ChanceRain}</td>)}
                     </tr>

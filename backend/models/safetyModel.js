@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const waveSchema = mongoose.Schema({
+const safetySchema = mongoose.Schema({
     endPoint: {
         type: String,
         required: true
@@ -9,29 +9,33 @@ const waveSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    lake: {
-        type: String,
-        required: true
-    },
     properties: {
         type: Array,
         required: true
     },
-    last_modified: {
+    date: {
         type: Date,
         required: true
     },
-    report: {
-        type: Array,
+    year: {
+        type: Number,
         required: true
     },
-    watertemp: {
-        type: String,
+    month: {
+        type: Number,
+        required: true
+    },
+    day: {
+        type: Number,
+        required: true
+    },
+    count: {
+        type: Number,
         required: true
     },
 
 })
 
-const Waves = mongoose.model('waves', waveSchema, 'waves')
+const Safety = mongoose.model('safety', safetySchema, 'safety')
 
-export default Waves
+export default Safety

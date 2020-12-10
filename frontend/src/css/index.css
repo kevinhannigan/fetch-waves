@@ -15,6 +15,47 @@ a.home {
   font-weight: bold;
 }
 
+div.safety {
+  font-size: 20px;
+  padding: 6px;
+  display: inline-block;
+
+}
+
+div.calendar {
+  color: white;
+  display: inline-block;
+  min-width: 175px;
+  font-size: 20px;
+  padding: 6px;
+  background: #2780e3;
+  width: fit-content;
+  border-style: solid;
+  border-color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+div.calendar:hover {
+  color: #2780e3;
+  display: inline-block;
+  min-width: 175px;
+  font-size: 20px;
+  padding: 6px;
+  background: white;
+  width: fit-content;
+  border-style: solid;
+  border-color: #2780e3;
+  text-align: center;
+  border-radius: 10px;
+}
+
+
+div.counter {
+  text-align: center;
+  padding-right: 10px;
+}
+
 td, th  {
   width: auto;
 }
@@ -83,6 +124,21 @@ td.bcell {
   border-radius: 10px;
 }
 
+.btn.loginSecondary {
+  color: #2780e3;
+  background-color: white;
+  border-color: #2780e3;
+  border-radius: 10px;
+}
+
+.btn.loginSecondary:hover {
+  color: white;
+  background-color: #2780e3;
+  border-color: #2780e3;
+  border-radius: 10px;
+}
+
+
 .btn {
   border-radius: 10px;
 }
@@ -96,6 +152,4 @@ td.bcell {
   border-color: white;
   border-radius: 10px;
 }
-
-
 

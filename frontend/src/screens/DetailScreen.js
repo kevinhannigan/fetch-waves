@@ -13,6 +13,7 @@ const DetailScreen = ({ match }) => {
     useEffect(() => {
         const fetchWave = async () => {
             const { data }  = await axios.get(`/api/waves/${match.params.endPoint}`)   
+            console.log(data)
             setWave(data)
 
         }
@@ -44,7 +45,7 @@ const DetailScreen = ({ match }) => {
                 <DetailsCards wave={wave} />
             </div>
             <div>
-            <h2 className='py-3'>36 Hour Forecast</h2>
+            <h2 className='py-3'>4 Day Forecast</h2>
             <a href='https://www.glerl.noaa.gov/res/glcfs/fcast/mwv.gif'><Button variant='primary'> <i className="fas fa-chart-line"></i>  NOAA Forecast </Button></a>
             <DetailsChart wave={wave} />
             <DetailsTable wave={wave}/>

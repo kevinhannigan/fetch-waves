@@ -5,7 +5,7 @@ import Calendar from '../components/Calendar'
 var startOfWeek = moment();
 var endOfWeek = moment().add(5, 'days');
 
-var days = [];
+var days = ['12-1', '12-2', '12-3'];
 var day = startOfWeek;
 
 while (day <= endOfWeek) {

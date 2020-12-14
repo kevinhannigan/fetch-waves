@@ -8,19 +8,24 @@ const DetailsChart = ({ wave }) => {
 
     const [yAxisValue, setYAxisValue] = useState('WaveHeight');
 
+    const renderTooltip = (tickItem) => {
+        console.log(tickItem)
+      }
+
     const formatXAxis = (tickItem) => {
         let time = tickItem.substring(11, 16)
         let hour = (time.split(':'))[0];
         let formathr = parseInt(hour, 10);
         let part = formathr >= 10 && formathr < 22 ? 'pm' : 'am';
         if (formathr >= 11 && formathr < 23) {
-          return (`${formathr - 10}${part}`)
+            return (`${formathr - 10}${part}`)
         } else if (formathr >= 23) {
-          return (`${formathr - 22}${part}`)
+            return (`${formathr - 22}${part}`)
         } else {
-          return (`${formathr + 2}${part}`)
+            return (`${formathr + 2}${part}`)
         }
-      }
+    }
+      
 
     return (
         <div>
@@ -44,9 +49,9 @@ const DetailsChart = ({ wave }) => {
                             }}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="validTime" tickFormatter={formatXAxis} interval={3} />
+                            <XAxis dataKey="validTime" tickFormatter={formatXAxis} interval={8} />
                             <YAxis type="number" />
-                            <Tooltip />
+                            <Tooltip/>
                             <Area type="monotone" dataKey={yAxisValue} stroke="#5d99c6" fill="#c3fdff" />
                         </AreaChart>
                     </ResponsiveContainer>

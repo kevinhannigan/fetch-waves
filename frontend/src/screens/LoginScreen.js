@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
+import md5 from 'md5';
 
 
 
 const LoginScreen = (props) => {
     const [user, setUser] = useState(undefined)
     const [failedLogin, setFailedLogin] = useState('')
+    const [failedRegister, setFailedRegister] = useState('')
     const [logInAttempt, setLogInAttempt] = useState('')
     const [passwordAttempt, setPasswordAttempt] = useState('')
     const [registerLogInAttempt, setRegisterLogInAttempt] = useState('')
@@ -15,9 +17,10 @@ const LoginScreen = (props) => {
     const [landing, setLanding] = useState('login')
 
     const handleLogin = () => {
+        let encryptedPw = md5(passwordAttempt)
         axios.post('/api/users/admin/login', {
             login_name: logInAttempt,
-            password: passwordAttempt
+            password: encryptedPw
           })
           .then(response => {
             //message 200
@@ -31,9 +34,28 @@ const LoginScreen = (props) => {
           });
       };
     
-    const handleRegister = () => {
-        console.log("Registering...")
-    }    
+      const handleRegister = () => {
+        if (
+            registerPasswordAttempt != passwordVerifyAttempt
+          ) {
+            setFailedRegister("Passwords don't match");
+            return;
+          }
+        let registerEncryptedPw = md5(registerPasswordAttempt)
+        axios.post("/api/users/admin/new", {
+              login_name: registerLogInAttempt,
+              password: registerEncryptedPw,
+            })
+            .then(response => {
+                setFailedRegister("");
+              let user = response.data;
+              props.changeLoggedIn(user);
+              window.location.href = '/';
+            })
+            .catch(err => {
+                setFailedRegister(err.response.data);
+            })
+      };  
 
     return (
         <div>
@@ -47,9 +69,7 @@ const LoginScreen = (props) => {
             )}
             {landing === 'login' ? (
                 <div>
-                    {user}
                     <form onSubmit={handleLogin}>
-                        {failedLogin}
                     <Form>
                         <Form.Group controlId="loginUsername">
                             <Form.Label>Username</Form.Label>
@@ -74,10 +94,10 @@ const LoginScreen = (props) => {
                                 }} />
                         </Form.Group>
                     </Form>
-                    <input type="submit" value="Login" />
+                    <input className='btn-primary' type="submit" value="Login" />
                     </form>
 
-                    <h4 className='py-3'>New to Fetch Waves suh?</h4>
+                    <h4 className='py-3'>New to Fetch Waves?</h4>
                     <Button
                         className="loginSecondary"
                         variant="primary"
@@ -125,15 +145,8 @@ const LoginScreen = (props) => {
                                         setPasswordVerifyAttempt(confPasswordValue)
                                 }} />
                             </Form.Group>
-                            <Button
-                            variant="primary"
-                            type="submit"
-                            onClick={() => {
-                                console.log('Register Pressed')
-                            }}>
-                            Register
-                        </Button>
                         </Form>
+                        <input className='btn-primary' type="submit" value="Register" />
                         </form>
 
                         <h4 className='py-3'>Already have an account?</h4>

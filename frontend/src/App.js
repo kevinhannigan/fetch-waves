@@ -17,47 +17,60 @@ const App = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-        const { user }  = await axios.get('/api/users/admin/current')   
-        setCurrentUser(user)
-
+      let user = await axios.get('/api/users/admin/current')
+      let userData = user.data.login_name
+      console.log(userData)
+      setCurrentUser(userData)
     }
     fetchUser()
-}, [])
+  }, [])
 
   const changeLoggedIn = (newUser) => {
-    setCurrentUser({current_user: newUser})
+    setCurrentUser(newUser)
   }
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header 
+        changeLoggedIn={changeLoggedIn} 
+        current_user={current_user}
+        />
       <main className='py-3'>
-        {current_user?.["_id"]}
         <Container>
           <Route path='/' component={HomeScreen} exact />
           <Route path='/waveforecast/:endPoint' component={DetailScreen} />
           <Route path='/report/:endPoint' component={ReportScreen} />
           <Route path='/wetsuitguide' component={WetsuitGuide} />
           <Route path='/sandbox' component={Sandbox} />
+
           {current_user ? (
-          <Route path='/surfsafe/:endPoint/:year/:month/:day' component={SurfSafeScreen} />) : (
-            <Route path='/surfsafe/:endPoint/:year/:month/:day'>
-              <Redirect to='/login-register' />
-            </Route>)}
+            <Route path='/surfsafe/:endPoint/:year/:month/:day' component={SurfSafeScreen} />) : (
+              <Route path='/surfsafe/:endPoint/:year/:month/:day'>
+                <Redirect to='/login-register' />
+              </Route>)}
+          {!current_user ? (
             <Route
-                path="/login-register"
-                render={props => (
-                    <LoginScreen
-                        {...props}
-                        changeLoggedIn={changeLoggedIn}
-                        />
-                      )}
-                    />
+              path="/login-register"
+              render={props => (
+                <LoginScreen
+                  {...props}
+                  changeLoggedIn={changeLoggedIn}
+                />
+              )}
+            />
+
+          ) : (
+              <Route path='/login-register'>
+                <Redirect to='/' />
+              </Route>
+            )}
+
         </Container>
       </main>
       <Footer />
     </BrowserRouter>
-  );
+  )
 }
+
 
 export default App;

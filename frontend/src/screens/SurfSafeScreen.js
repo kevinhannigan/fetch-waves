@@ -8,18 +8,6 @@ import '../css/WaveCard.css'
 
 const SurfSafeScreen = ({ match }) => {
     const [safetyDetail, setSafetyDetail] = useState({})
-    const [morningUpButtonVariant, setMorningUpButtonVariant] = useState('outline-primary')
-    const [morningDownButtonVariant, setMorningDownButtonVariant] = useState('outline-primary')
-    const [morningUpDisabled, setMorningUpDisabled] = useState(false)
-    const [morningDownDisabled, setMorningDownDisabled] = useState(true)
-    const [afternoonUpButtonVariant, setAfernoonUpButtonVariant] = useState('outline-primary')
-    const [afternoonDownButtonVariant, setAfernoonDownButtonVariant] = useState('outline-primary')
-    const [afternoonUpDisabled, setAfernoonUpDisabled] = useState(false)
-    const [afternoonDownDisabled, setAfernoonDownDisabled] = useState(true)
-    const [eveningUpButtonVariant, setEveningUpButtonVariant] = useState('outline-primary')
-    const [eveningDownButtonVariant, setEveningDownButtonVariant] = useState('outline-primary')
-    const [eveningUpDisabled, setEveningUpDisabled] = useState(false)
-    const [eveningDownDisabled, setEveningDownDisabled] = useState(true)
 
 
     useEffect(() => {
@@ -31,10 +19,12 @@ const SurfSafeScreen = ({ match }) => {
         fetchSafety()
     }, [match])
 
-    const voteRequest = async (vote, tod) => {
-        const { data } = await axios.put(`/api/safety/${match.params.endPoint}/${match.params.year}/${match.params.month}/${match.params.day}/${vote}/${tod}`)
+    const addUserRequest = async (vote, tod) => {
+        const { data } = await axios.post(`/api/safety/${match.params.endPoint}/${match.params.year}/${match.params.month}/${match.params.day}/${vote}/${tod}`)
+        console.log(data)
         setSafetyDetail(data)
     }
+
 
     var startOfWeek = moment();
     var endOfWeek = moment().add(5, 'days');
@@ -58,95 +48,79 @@ const SurfSafeScreen = ({ match }) => {
                 <h3>{safetyDetail.month}-{safetyDetail.day}-{safetyDetail.year}</h3>
                 <p>Upvote if you are heading out!</p>
             </div>
-            <div className="safety">
+            <div className="votingSection">
+            <div className="safety py-2">
                 <Button
                     onClick={() => {
-                        setMorningUpButtonVariant('primary')
-                        setMorningUpDisabled(true)
-                        setMorningDownDisabled(false)
-                        voteRequest('upvote', 'Morning')
-                    }}
-                    variant={morningUpButtonVariant}
-                    disabled={morningUpDisabled}
-                >
+                        addUserRequest('like','Morning')
+                    }}>
                     <i className="fas fa-caret-up"></i>
                 </Button>
                 {' '}  Morning  {' '}
                 <Button
                     onClick={() => {
-                        setMorningDownButtonVariant('primary')
-                        setMorningDownDisabled(true)
-                        setMorningUpDisabled(false)
-                        voteRequest('downvote', 'Morning')
-                    }}
-                    variant={morningDownButtonVariant}
-                    disabled={morningDownDisabled}
-                >
+                        addUserRequest('unlike', 'Morning')
+                    }}>
                     <i className="fas fa-caret-down"></i>
                 </Button>
                 <div className="counter">
-                    {' '}{safetyDetail?.properties?.[0]?.count}
+                    {' '}{safetyDetail?.properties?.[0]?.users.length}
+                </div>
+                <div className="counterList">
+                    <ul>
+                        {safetyDetail?.properties?.[0]?.users.map((user, index) =>
+                        <li key={index}>{user}</li>)}
+                    </ul>
                 </div>
             </div>
             <div className="safety">
                 <Button
                     onClick={() => {
-                        setAfernoonUpButtonVariant('primary')
-                        setAfernoonUpDisabled(true)
-                        setAfernoonDownDisabled(false)
-                        voteRequest('upvote', 'Afternoon')
-                    }}
-                    variant={afternoonUpButtonVariant}
-                    disabled={afternoonUpDisabled}
-                >
+                        addUserRequest('like', 'Afternoon')
+                    }}>
                     <i className="fas fa-caret-up"></i>
                 </Button>
                 {' '}  Afternoon  {' '}
                 <Button
                     onClick={() => {
-                        setAfernoonDownButtonVariant('primary')
-                        setAfernoonDownDisabled(true)
-                        setAfernoonUpDisabled(false)
-                        voteRequest('downvote', 'Afternoon')
-                    }}
-                    variant={afternoonDownButtonVariant}
-                    disabled={afternoonDownDisabled}
-                >
+                        addUserRequest('unlike', 'Afternoon')
+                    }}>
                     <i className="fas fa-caret-down"></i>
                 </Button>
                 <div className="counter">
-                    {' '}{safetyDetail?.properties?.[1]?.count}
+                    {' '}{safetyDetail?.properties?.[1]?.users.length}
+                </div>
+                <div>
+                    <ul>
+                        {safetyDetail?.properties?.[1]?.users.map((user, index) =>
+                        <li key={index}>{user}</li>)}
+                    </ul>
                 </div>
             </div>
             <div className="safety">
                 <Button
                     onClick={() => {
-                        setEveningUpButtonVariant('primary')
-                        setEveningUpDisabled(true)
-                        setEveningDownDisabled(false)
-                        voteRequest('upvote', 'Evening')
-                    }}
-                    variant={eveningUpButtonVariant}
-                    disabled={eveningUpDisabled}
-                >
+                        addUserRequest('like', 'Evening')
+                    }}>
                     <i className="fas fa-caret-up"></i>
                 </Button>
                 {' '}  Evening  {' '}
                 <Button
                     onClick={() => {
-                        setEveningDownButtonVariant('primary')
-                        setEveningDownDisabled(true)
-                        setEveningUpDisabled(false)
-                        voteRequest('downvote', 'Evening')
-                    }}
-                    variant={eveningDownButtonVariant}
-                    disabled={eveningDownDisabled}
-                >
+                        addUserRequest('unlike', 'Evening')
+                    }}>
                     <i className="fas fa-caret-down"></i>
                 </Button>
                 <div className="counter">
-                    {' '}{safetyDetail?.properties?.[2]?.count}
+                    {' '}{safetyDetail?.properties?.[2]?.users.length}
                 </div>
+                <div>
+                    <ul>
+                        {safetyDetail?.properties?.[2]?.users.map((user, index) =>
+                        <li key={index}>{user}</li>)}
+                    </ul>
+                </div>
+            </div>
             </div>
             <div>
             {days.map((day, index) => 

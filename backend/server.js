@@ -7,6 +7,7 @@ import session from 'express-session'
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose'
 import cors from 'cors'
+import md5 from 'md5'
 
 const MongoStore = connectMongo(session);
 

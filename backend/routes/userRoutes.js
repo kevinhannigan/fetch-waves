@@ -15,7 +15,7 @@ router.get('/', asyncHandler(async (req, res) => {
     }
 }))
 
-// @desc Fetch specific safety location
+// @desc Fetch specific user id
 // @route GET api/users/id
 router.get('/:id', asyncHandler(async (req, res) => {
     const user = await User.findOne({_id: req.params.id})
@@ -26,7 +26,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
     }
 }))
 
-// @desc Fetch specific safety location
+// @desc Fetch current user ID
 // @route GET api/users/id
 router.get('/admin/current', asyncHandler(async (req, res) => {
   let user_id = req.session.user_id;
@@ -42,8 +42,8 @@ router.get('/admin/current', asyncHandler(async (req, res) => {
       return;
     }
 
-    let { _id, loginName } = user;
-    let newUser = { _id, loginName };
+    let { _id, login_name } = user;
+    let newUser = { _id, login_name };
     res.status(200).send(newUser);
   });
 }))
@@ -52,45 +52,77 @@ router.get('/admin/current', asyncHandler(async (req, res) => {
 
 // @desc login a specific user and return a session ID
 // @route POST api/users/admin/login
-router.post("/admin/login", function(request, response) {
-  //request.session is an object you can read or write
-  //parameter in request body is accessed using request.body.parameter_name
-  let loginName = request.body.login_name;
-  let password_attempt = request.body.password;
+router.post("/admin/login", function(req, res) {
+  let loginName = req.body.login_name;
+  let password_attempt = req.body.password;
   User.findOne({ login_name: loginName }, (err, user) => {
     if (err || !user) {
       console.log("User with login_name:" + loginName + " not found.");
-      response.status(400).send("Login name was not recognized");
+      res.status(400).send("Login name was not recognized");
       return;
     }
     if (user.password != password_attempt) {
-      response.status(400).send("Wrong password");
+      res.status(400).send("Wrong password");
       return;
     }
-    request.session.login_name = loginName;
-    request.session.user_id = user._id;
-    // request.session.cookie.user_id = user._id;
+    req.session.login_name = loginName;
+    req.session.user_id = user._id;
+    // req.session.cookie.user_id = user._id;
     let { _id, first_name, last_name, login_name } = user;
     let newUser = { _id, first_name, last_name, login_name };
 
-    response.status(200).send(newUser);
+    res.status(200).send(newUser);
   });
-  //store into request.session.user_id so that others can read.
 });
 
 
 // @desc login a specific user and return a session ID
 // @route POST api/users/admin/logout
-router.post("/admin/logout", function(request, response) {
-  //request.session is an object you can read or write
-  request.session.destroy(function(err) {
+router.post("/admin/logout", function(req, res) {
+  req.session.destroy(function(err) {
     if (err) {
       console.log(err);
-      response.status(400).send("unable to logout");
+      res.status(400).send("unable to logout");
       return;
     }
-    response.status(200).send("successfully logged out");
+    res.status(200).send("successfully logged out");
   });
 });
+
+router.post("/admin/new", function(req, res) {
+  let {
+    login_name,
+    password
+  } = req.body;
+  if (!password) {
+    console.log("password cannot be blank");
+    res.status(400).send("Password cannot be blank.");
+    return;
+  } else {
+    User.findOne({ login_name }, function(err, user) {
+      if (user) {
+        res.status(400).send("Username is already taken.");
+        return;
+      }
+      User.create(
+        {
+          login_name,
+          password
+        },
+        function(_, newUser) {
+          req.session.login_name = login_name;
+          req.session.user_id = newUser._id;
+          let curr_user = {
+            _id: newUser._id,
+            login_name
+          };
+          res.status(200).send(curr_user);
+        }
+      );
+    });
+  }
+});
+
+
 
 export default router

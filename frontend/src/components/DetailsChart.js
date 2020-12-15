@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import {
-    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
-  } from 'recharts';
+     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+   } from 'recharts';
 
 const DetailsChart = ({ wave }) => {
 
     const [yAxisValue, setYAxisValue] = useState('WaveHeight');
-
-    const renderTooltip = (tickItem) => {
-        console.log(tickItem)
-      }
 
     const formatXAxis = (tickItem) => {
         let time = tickItem.substring(11, 16)
@@ -25,7 +21,6 @@ const DetailsChart = ({ wave }) => {
             return (`${formathr + 2}${part}`)
         }
     }
-      
 
     return (
         <div>
@@ -54,7 +49,7 @@ const DetailsChart = ({ wave }) => {
                             <Tooltip/>
                             <Area type="monotone" dataKey={yAxisValue} stroke="#5d99c6" fill="#c3fdff" />
                         </AreaChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer>  
                 </div>
         </div>
     )

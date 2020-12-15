@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import md5 from 'md5';
 
 
@@ -30,13 +30,15 @@ const LoginScreen = (props) => {
             setFailedLogin('Success')
           })
           .catch(err => {
-            setFailedLogin(err);
+            // let error = err.data
+            console.log(err)
+            // setFailedLogin(error);
           });
       };
     
       const handleRegister = () => {
         if (
-            registerPasswordAttempt != passwordVerifyAttempt
+            registerPasswordAttempt !== passwordVerifyAttempt
           ) {
             setFailedRegister("Passwords don't match");
             return;
@@ -69,8 +71,10 @@ const LoginScreen = (props) => {
             )}
             {landing === 'login' ? (
                 <div>
+                    <Alert variant={'danger'}>{failedRegister}</Alert>
+                    <Alert variant={'danger'}>{failedLogin}</Alert>
+                    <Alert variant={'danger'}>{user}</Alert>
                     <form onSubmit={handleLogin}>
-                    <Form>
                         <Form.Group controlId="loginUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control 
@@ -93,7 +97,6 @@ const LoginScreen = (props) => {
                                     setPasswordAttempt(passwordValue)
                                 }} />
                         </Form.Group>
-                    </Form>
                     <input className='btn-primary' type="submit" value="Login" />
                     </form>
 

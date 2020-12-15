@@ -9,6 +9,7 @@ import DetailScreen from './screens/DetailScreen'
 import ReportScreen from './screens/ReportScreen'
 import SurfSafeScreen from './screens/SurfSafeScreen'
 import LoginScreen from './screens/LoginScreen'
+import SurfSafeLandingScreen from './screens/SurfSafeLandingScreen'
 import WetsuitGuide from './components/WetsuitGuide'
 import Sandbox from './screens/Sandbox'
 
@@ -19,7 +20,6 @@ const App = () => {
     const fetchUser = async () => {
       let user = await axios.get('/api/users/admin/current')
       let userData = user.data.login_name
-      console.log(userData)
       setCurrentUser(userData)
     }
     fetchUser()
@@ -38,16 +38,12 @@ const App = () => {
       <main className='py-3'>
         <Container>
           <Route path='/' component={HomeScreen} exact />
+          <Route path='/surfsafe/' component={SurfSafeLandingScreen} exact />
           <Route path='/waveforecast/:endPoint' component={DetailScreen} />
           <Route path='/report/:endPoint' component={ReportScreen} />
           <Route path='/wetsuitguide' component={WetsuitGuide} />
           <Route path='/sandbox' component={Sandbox} />
-
-          {current_user ? (
-            <Route path='/surfsafe/:endPoint/:year/:month/:day' component={SurfSafeScreen} />) : (
-              <Route path='/surfsafe/:endPoint/:year/:month/:day'>
-                <Redirect to='/login-register' />
-              </Route>)}
+          <Route path='/surfsafe/:endPoint/:year/:month/:day'  component={SurfSafeScreen} />
           {!current_user ? (
             <Route
               path="/login-register"

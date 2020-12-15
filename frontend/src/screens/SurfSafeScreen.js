@@ -25,7 +25,6 @@ const SurfSafeScreen = ({ match }) => {
         setSafetyDetail(data)
     }
 
-
     var startOfWeek = moment();
     var endOfWeek = moment().add(5, 'days');
 
@@ -40,94 +39,100 @@ const SurfSafeScreen = ({ match }) => {
     return (
         <div className='py-2'>
             <div>
-                <Link className='btn btn-primary my-3 px-2' to={`/waveforecast/${safetyDetail.endPoint}`} >Analysis</Link>
+                <Link className='btn btn-primary my-3 px-2' to={`/surfsafe/`} >Back</Link>
             </div>
             <div>
                 <h1>Surf Safe </h1>
                 <h3>{safetyDetail.city} </h3>
                 <h3>{safetyDetail.month}-{safetyDetail.day}-{safetyDetail.year}</h3>
-                <p>Upvote if you are heading out!</p>
+                <p>Don't surf alone - upvote if you are heading out! (Requires login)</p>
             </div>
             <div className="votingSection">
-            <div className="safety py-2">
-                <Button
-                    onClick={() => {
-                        addUserRequest('like','Morning')
-                    }}>
-                    <i className="fas fa-caret-up"></i>
-                </Button>
-                {' '}  Morning  {' '}
-                <Button
-                    onClick={() => {
-                        addUserRequest('unlike', 'Morning')
-                    }}>
-                    <i className="fas fa-caret-down"></i>
-                </Button>
-                <div className="counter">
-                    {' '}{safetyDetail?.properties?.[0]?.users.length}
+                <div className="safety">
+                    <div className="votingbuttons">
+                        <Button
+                            onClick={() => {
+                                addUserRequest('like', 'Morning')
+                            }}>
+                            <i className="fas fa-caret-up"></i>
+                        </Button>
+                        {' '}  Morning  {' '}
+                        <Button
+                            onClick={() => {
+                                addUserRequest('unlike', 'Morning')
+                            }}>
+                            <i className="fas fa-caret-down"></i>
+                        </Button>
+                    </div>
+                    <div className="counter">
+                        {' '}{safetyDetail?.properties?.[0]?.users.length}
+                    </div>
+                    <div>
+                        <ul className="voting">
+                            {safetyDetail?.properties?.[0]?.users.map((user, index) =>
+                                <li className="listCount" key={index}>{user}</li>)}
+                        </ul>
+                    </div>
                 </div>
-                <div className="counterList">
-                    <ul>
-                        {safetyDetail?.properties?.[0]?.users.map((user, index) =>
-                        <li key={index}>{user}</li>)}
-                    </ul>
+                <div className="safety">
+                    <div className="votingbuttons">
+                        <Button
+                            onClick={() => {
+                                addUserRequest('like', 'Afternoon')
+                            }}>
+                            <i className="fas fa-caret-up"></i>
+                        </Button>
+                        {' '}  Afternoon  {' '}
+                        <Button
+                            onClick={() => {
+                                addUserRequest('unlike', 'Afternoon')
+                            }}>
+                            <i className="fas fa-caret-down"></i>
+                        </Button>
+                    </div>
+                    <div className="counter">
+                        {' '}{safetyDetail?.properties?.[1]?.users.length}
+                    </div>
+                    <div>
+                        <ul className="voting">
+                            {safetyDetail?.properties?.[1]?.users.map((user, index) =>
+                                <li className="listCount" key={index}>{user}</li>)}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div className="safety">
-                <Button
-                    onClick={() => {
-                        addUserRequest('like', 'Afternoon')
-                    }}>
-                    <i className="fas fa-caret-up"></i>
-                </Button>
-                {' '}  Afternoon  {' '}
-                <Button
-                    onClick={() => {
-                        addUserRequest('unlike', 'Afternoon')
-                    }}>
-                    <i className="fas fa-caret-down"></i>
-                </Button>
-                <div className="counter">
-                    {' '}{safetyDetail?.properties?.[1]?.users.length}
+                <div className="safety">
+                    <div className="votingbuttons">
+                        <Button
+                            onClick={() => {
+                                addUserRequest('like', 'Evening')
+                            }}>
+                            <i className="fas fa-caret-up"></i>
+                        </Button>
+                        {' '}  Evening  {' '}
+                        <Button
+                            onClick={() => {
+                                addUserRequest('unlike', 'Evening')
+                            }}>
+                            <i className="fas fa-caret-down"></i>
+                        </Button>
+                    </div>
+                    <div className="counter">
+                        {' '}{safetyDetail?.properties?.[2]?.users.length}
+                    </div>
+                    <div>
+                        <ul className="voting">
+                            {safetyDetail?.properties?.[2]?.users.map((user, index) =>
+                                <li className="listCount" key={index}>{user}</li>)}
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <ul>
-                        {safetyDetail?.properties?.[1]?.users.map((user, index) =>
-                        <li key={index}>{user}</li>)}
-                    </ul>
-                </div>
-            </div>
-            <div className="safety">
-                <Button
-                    onClick={() => {
-                        addUserRequest('like', 'Evening')
-                    }}>
-                    <i className="fas fa-caret-up"></i>
-                </Button>
-                {' '}  Evening  {' '}
-                <Button
-                    onClick={() => {
-                        addUserRequest('unlike', 'Evening')
-                    }}>
-                    <i className="fas fa-caret-down"></i>
-                </Button>
-                <div className="counter">
-                    {' '}{safetyDetail?.properties?.[2]?.users.length}
-                </div>
-                <div>
-                    <ul>
-                        {safetyDetail?.properties?.[2]?.users.map((user, index) =>
-                        <li key={index}>{user}</li>)}
-                    </ul>
-                </div>
-            </div>
             </div>
             <div>
-            {days.map((day, index) => 
-            <Calendar date={day} endPoint={match.params.endPoint} /> )}
+                {days.map((day, index) =>
+                    <Calendar date={day} endPoint={match.params.endPoint} />)}
+            </div>
         </div>
-        </div>
-    );
+    ); 
 }
 
 export default SurfSafeScreen

@@ -20,7 +20,7 @@ const DetailsTable = ({ wave }) => {
     return (
         <div>
             <Table bordered hover className="table-light table-responsive">
-                <thead class="thead-dark">
+                <thead className="thead-dark">
                     <tr>
                         <th className="min">Date</th>
                         {wave?.properties?.map((w, index) =>

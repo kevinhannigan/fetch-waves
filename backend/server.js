@@ -14,6 +14,7 @@ const MongoStore = connectMongo(session);
 import waveRoutes from './routes/waveRoutes.js'
 import safetyRoutes from './routes/safetyRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import locationRoutes from './routes/locationRoutes.js'
 
 dotenv.config()
 
@@ -40,6 +41,8 @@ app.use('/api/waves', waveRoutes)
 app.use('/api/safety', safetyRoutes)
 
 app.use('/api/users', userRoutes)
+
+app.use('/api/locations', locationRoutes)
 
 const __dirname = path.resolve()
 

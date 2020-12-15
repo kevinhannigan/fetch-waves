@@ -20,7 +20,16 @@ div.safety {
   padding: 6px;
   display: inline-block;
   vertical-align: text-top;
+  min-width: 300px;
+}
 
+div.alignlogin {
+  display: inline-block;
+}
+
+div.votingbuttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 div.counterList {
@@ -166,10 +175,14 @@ td.bcell {
 
 div.logout {
   text-align: right;
+  display: inline-flex;
 }
 
 div.loginname {
   text-align: right;
+  color: white;
+  font-weight: bold;
+  display: inline-block
 }
 
 div.votingSection {
@@ -195,3 +208,32 @@ input.register {
   padding: 1rem 1rem;
 }
 
+ul.voting {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+li.listCount {
+  list-style-type: none;
+  color: black;
+  background: #dadde0;
+  padding:2px;
+  text-align: center;
+  list-style-position:inside;
+  border: 5px solid white;
+  border-radius: 10px;
+}
+
+.badge-locations {
+color: #fff;
+background-color: #2780e3;
+border: white;
+border-width: 10px;
+padding: 10px 10px 10px 10px;
+border-radius: 10px;
+}

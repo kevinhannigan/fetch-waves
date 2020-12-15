@@ -57,19 +57,18 @@ router.post("/admin/login", function(req, res) {
   let password_attempt = req.body.password;
   User.findOne({ login_name: loginName }, (err, user) => {
     if (err || !user) {
-      console.log("User with login_name:" + loginName + " not found.");
-      res.status(400).send("Login name was not recognized");
+      res.status(400).send({"message": "Login name was not recognized"});
       return;
     }
     if (user.password != password_attempt) {
-      res.status(400).send("Wrong password");
+      res.status(400).send({"message": "Incorrect password"});
       return;
     }
     req.session.login_name = loginName;
     req.session.user_id = user._id;
     // req.session.cookie.user_id = user._id;
-    let { _id, first_name, last_name, login_name } = user;
-    let newUser = { _id, first_name, last_name, login_name };
+    let { _id, login_name } = user;
+    let newUser = { _id, login_name };
 
     res.status(200).send(newUser);
   });

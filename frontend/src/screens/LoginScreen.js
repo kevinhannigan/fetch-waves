@@ -28,6 +28,7 @@ const LoginScreen = (props) => {
                 let user = response.data.login_name
                 props.changeLoggedIn(user)
                 setUser(user)
+                window.history.back()
             })
             .catch(err => {
                 setFailedLogin(err.response.data)
@@ -51,7 +52,7 @@ const LoginScreen = (props) => {
                 setFailedRegister("");
                 let user = response.data.login_name;
                 props.changeLoggedIn(user);
-                window.location.href = '/';
+                window.history.back()
             })
             .catch(err => {
                 setFailedRegister(err.response.data);
@@ -59,7 +60,7 @@ const LoginScreen = (props) => {
     };
 
     return (
-        <div>
+        <div className="detail-container">
             {landing === 'login' ? (
                 <h1>
                     Login

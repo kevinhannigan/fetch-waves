@@ -53,7 +53,7 @@ router.get('/admin/current', asyncHandler(async (req, res) => {
 // @desc login a specific user and return a session ID
 // @route POST api/users/admin/login
 router.post("/admin/login", function(req, res) {
-  let loginName = req.body.login_name;
+  let loginName = req.body.login_name.toLowerCase();
   let password_attempt = req.body.password;
   User.findOne({ login_name: loginName }, (err, user) => {
     if (err || !user) {
@@ -89,10 +89,8 @@ router.post("/admin/logout", function(req, res) {
 });
 
 router.post("/admin/new", function(req, res) {
-  let {
-    login_name,
-    password
-  } = req.body;
+  let login_name = req.body.login_name.toLowerCase();
+  let password = req.body.password;
   if (!password) {
     console.log("password cannot be blank");
     res.status(400).send("Password cannot be blank");

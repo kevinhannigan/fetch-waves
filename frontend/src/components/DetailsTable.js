@@ -3,20 +3,20 @@ import { Table } from 'react-bootstrap'
 import WaveArrow from './WaveArrow'
 
 const DetailsTable = ({ wave }) => {
-    
+
     const timeConversion = (time) => {
         let hour = (time.split(':'))[0];
         let formathr = parseInt(hour, 10);
         let part = formathr >= 10 && formathr < 22 ? 'pm' : 'am';
         if (formathr >= 11 && formathr < 23) {
-          return (`${formathr - 10} ${part}`)
+            return (`${formathr - 10} ${part}`)
         } else if (formathr >= 23) {
-          return (`${formathr - 22} ${part}`)
+            return (`${formathr - 22} ${part}`)
         } else {
-          return (`${formathr + 2} ${part}`)
+            return (`${formathr + 2} ${part}`)
         }
-      }
-    
+    }
+
     return (
         <div>
             <Table bordered hover className="table-light table-responsive">

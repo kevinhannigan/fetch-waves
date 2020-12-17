@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import {
-     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
-   } from 'recharts';
+    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 
 const DetailsChart = ({ wave }) => {
 
@@ -28,29 +28,29 @@ const DetailsChart = ({ wave }) => {
                 <Button className="btn-secondary" onClick={() => setYAxisValue('WaveHeight')}>
                     Wave Height
                 </Button> {' '}
-                <Button className="btn-secondary"  onClick={() => setYAxisValue('WavePeriod')}>
+                <Button className="btn-secondary" onClick={() => setYAxisValue('WavePeriod')}>
                     Wave Period
                 </Button> {' '}
-                <Button className="btn-secondary"  onClick={() => setYAxisValue('WindSpeed')}>
+                <Button className="btn-secondary" onClick={() => setYAxisValue('WindSpeed')}>
                     Wind Speed
                 </Button> {' '}
             </div>
             <div style={{ width: '100%', height: 160 }}>
-                    <ResponsiveContainer>
-                        <AreaChart
-                            data={wave.properties}
-                            margin={{
-                                top: 10, right: 10, left: 0, bottom: 10,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="validTime" tickFormatter={formatXAxis} interval={8} />
-                            <YAxis type="number" />
-                            <Tooltip/>
-                            <Area type="monotone" dataKey={yAxisValue} stroke="#5d99c6" fill="#c3fdff" />
-                        </AreaChart>
-                    </ResponsiveContainer>  
-                </div>
+                <ResponsiveContainer>
+                    <AreaChart
+                        data={wave.properties}
+                        margin={{
+                            top: 10, right: 10, left: 0, bottom: 10,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="validTime" tickFormatter={formatXAxis} interval={8} />
+                        <YAxis type="number" />
+                        <Tooltip />
+                        <Area type="monotone" dataKey={yAxisValue} stroke="#5d99c6" fill="#c3fdff" />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     )
 }

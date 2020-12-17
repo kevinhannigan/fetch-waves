@@ -6,7 +6,13 @@ const router = express.Router()
 // @desc Fetch all wave locations
 // @route GET api/waves
 router.get('/', asyncHandler(async (req, res) => {
-    const waves = await Waves.find({})
+    const keyword = req.query.keyword ? {
+        endPoint: {
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+    const waves = await Waves.find({...keyword})
     
     res.json(waves)
 }))

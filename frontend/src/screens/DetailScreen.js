@@ -14,7 +14,6 @@ const DetailScreen = ({ match }) => {
     useEffect(() => {
         const fetchWave = async () => {
             const { data }  = await axios.get(`/api/waves/${match.params.endPoint}`)   
-            console.log(data)
             setWave(data)
             setLoading(false)
 
@@ -36,13 +35,13 @@ const DetailScreen = ({ match }) => {
     return (
         <div>
             {loading ? (
-                <div><h3>Loading...</h3></div>
+                <div><h3>Fetching Waves 🌊 🌊 🌊.</h3></div>
             ): (
-            <div>
+            <div className="detail-container">
                 <div className='py-2'>
                     <Link className='btn btn-light my-3 px-2' to='/'> Back </Link> {' '}
                     <Link className='btn btn-primary my-3 px-2' to={`/report/${wave.endPoint}`} > Report </Link>{' '}
-                    <Link className='btn btn-secondary my-3 px-2' to={`/surfsafe/`} > Surf Safe </Link>
+                    <Link className='btn btn-secondary my-3 px-2' to={`/surfsafe/${wave.endPoint}`} > Surf Safe </Link>
                     <h1>{wave.city}</h1>
                     <h4>Last Updated: {timeFormat(wave.last_modified)}</h4>
                 </div>

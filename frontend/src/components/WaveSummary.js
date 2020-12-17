@@ -1,15 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Button } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import WaveArrow from './WaveArrow'
 
 const WaveSummary = ({ waves }) => {
     return (
-        <div className="py-3">
+        <div className="summary-details">
             <Link to={`/waveforecast/${waves.endPoint}`} className="home">
-                <Button as="h4" className="py-2" variant="homepage">{waves.city}{' '} </Button><br></br>
-                View Details <i className="fas fa-chart-line"></i> 
-            </Link>
+            <div className="summary-location">
+                <h4 className="detail-summary">{waves.city}{' '} </h4><br></br>
+                <h5 className="detail-summary">View Details <i className="fas fa-chart-line"></i> </h5>
+            </div>
             <div className="pt-2">
                 <Row index={0} className="py-2">
                     <Col><i className="fas fa-water"></i></Col>
@@ -46,6 +47,7 @@ const WaveSummary = ({ waves }) => {
                     </Col>
                 </Row>
             </div>
+            </Link>
         </div>
     )
 }

@@ -17,8 +17,8 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // @desc Fetch specific safety location
 // @route GET api/safety/endPoint
-router.get('/:endPoint/:year/:month/:day', asyncHandler(async (req, res) => {
-    const safetyLocation = await Safety.findOne({ endPoint: req.params.endPoint, year: req.params.year, month: req.params.month, day: req.params.day }).exec()
+router.get('/:endPoint/:location/:year/:month/:day', asyncHandler(async (req, res) => {
+    const safetyLocation = await Safety.findOne({ endPoint: req.params.endPoint, location: req.params.location, year: req.params.year, month: req.params.month, day: req.params.day }).exec()
     if (safetyLocation) {
         res.json(safetyLocation)
     } else {
@@ -26,36 +26,14 @@ router.get('/:endPoint/:year/:month/:day', asyncHandler(async (req, res) => {
     }
 }))
 
-
-router.put('/:endPoint/:year/:month/:day/upvote/:timeOfDay', asyncHandler(async (req, res) => {
-    const query = { endPoint: req.params.endPoint, year: req.params.year, month: req.params.month, day: req.params.day, "properties.timeOfDay": req.params.timeOfDay };
-    Safety.findOneAndUpdate(query, { $inc: { "properties.$.count": 1 } }, { new: true }, function (err, result) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(result);
-        }
-    })
-}))
-
-router.put('/:endPoint/:year/:month/:day/downvote/:timeOfDay', asyncHandler(async (req, res) => {
-    const query = { endPoint: req.params.endPoint, year: req.params.year, month: req.params.month, day: req.params.day, "properties.timeOfDay": req.params.timeOfDay };
-    Safety.findOneAndUpdate(query, { $inc: { "properties.$.count": -1 } }, { new: true }, function (err, result) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(result);
-        }
-    })
-}))
-
-router.post('/:endPoint/:year/:month/:day/like/:timeOfDay', asyncHandler(async (req, res) => {
+router.post('/:endPoint/:location/:year/:month/:day/like/:timeOfDay', asyncHandler(async (req, res) => {
     if (!req.session.user_id) {
-        res.status(401).send("not logged in");
+        res.status(400).send("Must be logged in to vote");
         return;
     }
     const conditions = {
         endPoint: req.params.endPoint,
+        location: req.params.location,
         year: req.params.year,
         month: req.params.month,
         day: req.params.day,
@@ -71,13 +49,14 @@ router.post('/:endPoint/:year/:month/:day/like/:timeOfDay', asyncHandler(async (
     })
 }))
 
-router.post('/:endPoint/:year/:month/:day/unlike/:timeOfDay', asyncHandler(async (req, res) => {
+router.post('/:endPoint/:location/:year/:month/:day/unlike/:timeOfDay', asyncHandler(async (req, res) => {
     if (!req.session.user_id) {
-        res.status(401).send("not logged in");
+        res.status(400).send("Must be logged in to vote");
         return;
     }
     const conditions = {
         endPoint: req.params.endPoint,
+        location: req.params.location,
         year: req.params.year,
         month: req.params.month,
         day: req.params.day,

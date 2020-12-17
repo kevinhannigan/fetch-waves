@@ -18,7 +18,7 @@ const ReportScreen = ({ match }) => {
     }, [match])
 
     return (
-        <div className='py-2'>
+        <div className='detail-container'>
             <Link className='btn btn-primary my-3 px-2' to={`/waveforecast/${reports.endPoint}`} >Analysis</Link>
             <Card className="report-card py-3 mx-3">
                 <h1>{reports.city} Marine Forecast</h1>

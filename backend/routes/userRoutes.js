@@ -57,11 +57,11 @@ router.post("/admin/login", function(req, res) {
   let password_attempt = req.body.password;
   User.findOne({ login_name: loginName }, (err, user) => {
     if (err || !user) {
-      res.status(400).send({"message": "Login name was not recognized"});
+      res.status(400).send("Login name not recognized");
       return;
     }
     if (user.password != password_attempt) {
-      res.status(400).send({"message": "Incorrect password"});
+      res.status(400).send("Incorrect password");
       return;
     }
     req.session.login_name = loginName;
@@ -95,8 +95,11 @@ router.post("/admin/new", function(req, res) {
   } = req.body;
   if (!password) {
     console.log("password cannot be blank");
-    res.status(400).send("Password cannot be blank.");
+    res.status(400).send("Password cannot be blank");
     return;
+  } else if (login_name.split(" ").join("").length < 4) {
+      res.status(400).send("Login must be at least 4 characters");
+      return;
   } else {
     User.findOne({ login_name }, function(err, user) {
       if (user) {

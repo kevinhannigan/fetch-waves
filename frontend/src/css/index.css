@@ -20,7 +20,8 @@ div.safety {
   padding: 6px;
   display: inline-block;
   vertical-align: text-top;
-  min-width: 300px;
+  min-width: 250px;
+  max-width: 250px;
 }
 
 div.alignlogin {
@@ -185,6 +186,80 @@ div.loginname {
   display: inline-block
 }
 
+div.surfsafe-badges {
+  display: inline-flex;
+}
+
+div.header-container {
+  display: flex;
+  height: 56px;
+  background: #2780e3;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+div.header-logo {
+  margin: 0 15px;
+}
+
+div.header-search {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+  height: 100%;
+  align-items: center;
+  padding-right: 5px;
+}
+
+div.login-name {
+  color:white;
+  font-weight: bold;
+}
+
+input.custom-search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  font-size: 12px;
+  letter-spacing: .8px;
+  color: #048;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.form-inline .form-control {
+  display: inline-block;
+  width: 100%;
+  max-width: 400px;
+  vertical-align: middle;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 100%;
+}
+
+header.custom-header {
+  display:block;
+  background:#2780e3;
+  ;
+}
+
+div.header-login {
+  flex: 0 0 auto;
+}
+
 div.votingSection {
   vertical-align: text-top;
 }
@@ -202,9 +277,6 @@ input.register {
   position: relative;
   display: flex;
   flex-wrap: initial;
-  /* flex-wrap: initial; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
   padding: 1rem 1rem;
 }
 
@@ -236,4 +308,91 @@ border: white;
 border-width: 10px;
 padding: 10px 10px 10px 10px;
 border-radius: 10px;
+}
+
+div.home-container {
+  position: relative;
+  text-align: center;
+  color:black;
+}
+
+img.home-image {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+
+}
+
+div.home-text {
+  position: absolute;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 50%;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #b8d5e0;
+    opacity: .3;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+div.home-search {
+  position: absolute;
+  width: 80%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.home-conditions {
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+}
+
+div.home-tiles {
+  align-items: center;
+}
+
+
+div.home-row {
+  border: 1px solid black;
+  padding: 5px 5px 5px 5px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+div.home-row:hover {
+  border: 1px solid black;
+  padding: 5px 5px 5px 5px;
+  margin: 10px;
+  border-radius: 10px;
+  background: #d1eaf3
+}
+
+div.summary-location {
+  text-align: center;
+}
+
+div.main-container {
+  max-width: 900px;
+  margin: 0 auto;
+
+}
+
+h1.header-summary {
+  text-align: center;
+}
+
+h4.detail-summary {
+  text-align: center;
+}
+
+h5.detail-summary {
+  text-align: center;
+}
+
+div.detail-container {
+  padding-left: 10px;
 }

@@ -9,12 +9,12 @@ const safetySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    properties: {
-        type: Array,
+    location: {
+        type: String,
         required: true
     },
-    date: {
-        type: Date,
+    properties: {
+        type: Array,
         required: true
     },
     year: {
@@ -28,11 +28,7 @@ const safetySchema = mongoose.Schema({
     day: {
         type: Number,
         required: true
-    },
-    count: {
-        type: Number,
-        required: true
-    },
+    }
 
 })
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import axios from 'axios';
-import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import DetailScreen from './screens/DetailScreen'
 import ReportScreen from './screens/ReportScreen'
 import SurfSafeScreen from './screens/SurfSafeScreen'
+import SurfSafeCityScreen from './screens/SurfSafeCityScreen'
 import LoginScreen from './screens/LoginScreen'
 import SurfSafeLandingScreen from './screens/SurfSafeLandingScreen'
 import WetsuitGuide from './components/WetsuitGuide'
@@ -35,15 +35,16 @@ const App = () => {
         changeLoggedIn={changeLoggedIn} 
         current_user={current_user}
         />
-      <main className='py-3'>
-        <Container>
+      <main>
+        <div className="main-container">
           <Route path='/' component={HomeScreen} exact />
           <Route path='/surfsafe/' component={SurfSafeLandingScreen} exact />
+          <Route path='/surfsafe/:endPoint' component={SurfSafeCityScreen} exact />
           <Route path='/waveforecast/:endPoint' component={DetailScreen} />
           <Route path='/report/:endPoint' component={ReportScreen} />
           <Route path='/wetsuitguide' component={WetsuitGuide} />
           <Route path='/sandbox' component={Sandbox} />
-          <Route path='/surfsafe/:endPoint/:year/:month/:day'  component={SurfSafeScreen} />
+          <Route path='/surfsafe/:endPoint/:location/:year/:month/:day'  component={SurfSafeScreen} />
           {!current_user ? (
             <Route
               path="/login-register"
@@ -60,8 +61,8 @@ const App = () => {
                 <Redirect to='/' />
               </Route>
             )}
-
-        </Container>
+          <Route path='/search/:keyword' component={HomeScreen} />
+        </div>
       </main>
       <Footer />
     </BrowserRouter>

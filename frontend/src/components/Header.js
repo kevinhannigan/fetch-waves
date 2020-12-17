@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Container, Button } from 'react-bootstrap'
+import { Route, Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
+import SearchBox from './SearchBox'
 import axios from 'axios';
 
 
@@ -16,26 +16,27 @@ const Header = (props) => {
     };
 
     return (
-        <header>
-            <Navbar className="custom" bg="primary" variant="primary" expand="lg" collapseOnSelect>
-                <Container>
-                    <LinkContainer to='/'>
-                        <Navbar.Brand><i className="fas fa-water"></i> Fetch Waves</Navbar.Brand>
-                    </LinkContainer>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    </Navbar.Collapse>
-                {props?.current_user ? (
-                    <div className="alignlogin">
-                        <div className="loginname">{props?.current_user}</div>
-                        <div className="logout">
-                            <Button onClick={handleLogOut}>Log Out</Button>
-                        </div>
-                    </div>) : (
-                        <Link className='btn btn-primary my-3 px-2' to='/login-register'> Login </Link>
-                    )}
-                </Container>        
-            </Navbar>
+        <header className="custom-header">
+            <div className="header-container">
+                <div className="header-logo">
+                    <Link to='/'>
+                        <i className="fas fa-water"></i>
+                    </Link>
+                </div>
+                <div className="header-search">
+                    <Route render={({ history }) => <SearchBox history={history} />} />
+                </div>
+                <div className="header-login">
+                    {props?.current_user ? (
+                        <div className="login-name">
+                            {props?.current_user}<Button onClick={handleLogOut}>Logout  <i className="fas fa-sign-out-alt"></i></Button>
+                        </div>) : (
+                            <div className="login-name">
+                                <Link className='btn btn-primary my-3 px-2' to='/login-register'> Login </Link>
+                            </div>
+                        )}
+                </div>
+            </div>
         </header>
     )
 }

@@ -47,7 +47,7 @@ const DetailsCards = ({ wave }) => {
                         <Card.Title><i className="fas fa-cloud-showers-heavy"></i></Card.Title>
                         <Card.Subtitle>Chance of Rain</Card.Subtitle>
                         <div>
-                            {wave?.properties?.[0]?.ChanceRain}%
+                            {Math.ceil(wave?.properties?.[0]?.ChanceRain/10)*10}%
                         </div>
                     </Card.Body>
 
@@ -61,7 +61,7 @@ const DetailsCards = ({ wave }) => {
                         </div>
                     </Card.Body>
                 </Card>
-                <Card className='card-style text-white bg-primary mb-3'>
+                {/* <Card className='card-style text-white bg-primary mb-3'>
                     <Card.Body>
                         <Card.Title><i className='fas fa-snowflake'></i></Card.Title>
                         <Card.Subtitle className="text-center">Water Temperature</Card.Subtitle>
@@ -74,7 +74,7 @@ const DetailsCards = ({ wave }) => {
                             </Link>
                         </div>
                     </Card.Body>
-                </Card>
+                </Card> */}
             </div>
         </div>
     )

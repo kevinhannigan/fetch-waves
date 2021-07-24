@@ -396,3 +396,8 @@ h5.detail-summary {
 div.detail-container {
   padding-left: 10px;
 }
+
+.table td:first-child {
+  position: sticky;
+  left:0
+}

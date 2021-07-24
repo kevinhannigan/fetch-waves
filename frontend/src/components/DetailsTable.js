@@ -19,7 +19,7 @@ const DetailsTable = ({ wave }) => {
 
     return (
         <div>
-            <Table bordered hover className="table-light table-responsive">
+            <Table bordered hover className="table-light table-responsive sticky">
                 <thead className="thead-dark">
                     <tr>
                         <th className="min">Date</th>
@@ -66,7 +66,7 @@ const DetailsTable = ({ wave }) => {
                     <tr>
                         <th>Precipitation %</th>
                         {wave?.properties?.map((w, index) =>
-                            <td className="min" key={index}>{w.ChanceRain}</td>)}
+                            <td className="min" key={index}>{Math.ceil(w.ChanceRain/10)*10}</td>)}
                     </tr>
                 </tbody>
             </Table>

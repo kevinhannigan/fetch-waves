@@ -41,7 +41,7 @@ const DetailScreen = ({ match }) => {
                 <div className='py-2'>
                     <Link className='btn btn-light my-3 px-2' to='/'> Back </Link> {' '}
                     <Link className='btn btn-primary my-3 px-2' to={`/report/${wave.endPoint}`} > Report </Link>{' '}
-                    <Link className='btn btn-secondary my-3 px-2' to={`/surfsafe/${wave.endPoint}`} > Surf Safe </Link>
+                    {/* <Link className='btn btn-secondary my-3 px-2' to={`/surfsafe/${wave.endPoint}`} > Surf Safe </Link> */}
                     <h1>{wave.city}</h1>
                     <h4>Last Updated: {timeFormat(wave.last_modified)}</h4>
                 </div>

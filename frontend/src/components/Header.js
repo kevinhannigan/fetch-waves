@@ -26,7 +26,7 @@ const Header = (props) => {
                 <div className="header-search">
                     <Route render={({ history }) => <SearchBox history={history} />} />
                 </div>
-                <div className="header-login">
+                {/* <div className="header-login">
                     {props?.current_user ? (
                         <div className="login-name">
                             {props?.current_user}<Button onClick={handleLogOut}>Logout  <i className="fas fa-sign-out-alt"></i></Button>
@@ -35,7 +35,7 @@ const Header = (props) => {
                                 <Link className='btn btn-primary my-3 px-2' to='/login-register'> Login </Link>
                             </div>
                         )}
-                </div>
+                </div> */}
             </div>
         </header>
     )
